@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 // add loop somewhere
 /**
@@ -34,10 +35,10 @@ public class Client {
         }
     }
     
-    public String readResults(){
-        String results = "";
+    public ArrayList<Object> readResults(){
+        ArrayList<Object> results = new ArrayList<>();
         try {
-            results = (String) input.readObject();
+            results = (ArrayList<Object>) input.readObject();
         } catch (IOException e) {
             System.out.println("Error getting results: " + e.getMessage());
         } catch (ClassNotFoundException e) {

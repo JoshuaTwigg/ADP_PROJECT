@@ -48,8 +48,8 @@ public class Server {
             output.writeObject("message out");
             System.out.println("message sent");
         }
-        catch(IOException ex){
-            System.out.println(ex.getMessage());
+        catch(IOException e){
+            System.out.println("Error writing results: " + e.getMessage());
         }
     }
     
