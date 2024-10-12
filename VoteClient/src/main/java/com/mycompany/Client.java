@@ -19,7 +19,9 @@ public class Client {
 
     public Client() {      
         try {
+            System.out.println("creating socket");
             socket = new Socket("127.0.0.1", 6666);
+            System.out.println("socket created");
         } catch (IOException e) {
             System.out.println("Error creating socket: " + e.getMessage());
         }
@@ -28,17 +30,20 @@ public class Client {
     
     private void createStreams(){
         try {
-            input = new ObjectInputStream(socket.getInputStream());
+            System.out.println("creating streams");
             output = new ObjectOutputStream(socket.getOutputStream());
+            input = new ObjectInputStream(socket.getInputStream()); 
+            System.out.println("streams created");
         } catch (IOException e) {
             System.out.println("Error creating connection: " + e.getMessage());
         }
     }
     
-    public ArrayList<Object> readResults(){
-        ArrayList<Object> results = new ArrayList<>();
+    public ArrayList<Object[]> readResults(){
+        ArrayList<Object[]> results = new ArrayList<>();
         try {
-            results = (ArrayList<Object>) input.readObject();
+            System.out.println("reading results");
+            results = (ArrayList<Object[]>) input.readObject();
         } catch (IOException e) {
             System.out.println("Error getting results: " + e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -47,8 +52,9 @@ public class Client {
         return results;
     }
     
-    private void writeVehicle(String vehicle){
+    public void writeVehicle(String vehicle){
         try {
+            System.out.println("writing vehicle");
             output.writeObject(vehicle);
             output.flush();
         } catch (IOException e) {
@@ -66,15 +72,26 @@ public class Client {
         }
     }
     
-    // TESTING
-    public static void main(String[] args){
-        System.out.println("CLIENT");
-
+    public static void main(String[] args) {
         Client client = new Client();
-        client.writeVehicle("vehicle text");
-        String r = client.readResults(); 
-        System.out.println(r);
-        
-        client.close();
+        ArrayList<Object[]> items = client.readResults();
+        System.out.println("Cars \t\t\t Price");  
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println(items.get(i)[0] + "\t\t\t" + items.get(i)[1]);           
+        }
+        System.out.println("\nWrite Car1");
+        client.writeVehicle("Car1");
+        items = client.readResults();
+        System.out.println("Cars \t\t\t Price");  
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println(items.get(i)[0] + "\t\t\t" + items.get(i)[1]);           
+        }
+        System.out.println("\nWrites Car");
+        client.writeVehicle("Car");
+        items = client.readResults();
+        System.out.println("Cars \t\t\t Price");  
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println(items.get(i)[0] + "\t\t\t" + items.get(i)[1]);           
+        }
     }
 }
