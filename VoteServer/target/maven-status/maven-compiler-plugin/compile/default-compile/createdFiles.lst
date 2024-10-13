@@ -1,0 +1,10 @@
+com\mycompany\databaseControl\DBRead.class
+com\mycompany\QuickAdd.class
+com\mycompany\databaseControl\DBDelete.class
+com\mycompany\Server.class
+com\mycompany\databaseControl\Connect.class
+com\mycompany\databaseControl\DBInsert.class
+com\mycompany\databaseControl\ServerDAO.class
+com\mycompany\databaseControl\DBUpdate.class
+com\mycompany\Main.class
+com\mycompany\GUIServer.class

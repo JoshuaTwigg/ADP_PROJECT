@@ -1,0 +1,4 @@
+-- remove temp file and comment before uploading (including this file)
+- place code for connections in the code for the GUI
+- learn the git command to download and load branches and view commits
+---
