@@ -256,7 +256,7 @@ public class GUIClient extends JFrame {
                             // updating the combobox
                             comboBox.addItem(newCar);
                             
-                                System.out.println("\n<Car added>");
+                            System.out.println("\n<Car added>");
                             }
 
                             
